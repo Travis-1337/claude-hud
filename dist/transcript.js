@@ -37,6 +37,7 @@ function serializeTranscriptData(data) {
             endTime: agent.endTime?.toISOString(),
         })),
         todos: data.todos.map((todo) => ({ ...todo })),
+        toolCounts: data.toolCounts,
         sessionStart: data.sessionStart?.toISOString(),
         sessionName: data.sessionName,
     };
@@ -54,6 +55,7 @@ function deserializeTranscriptData(data) {
             endTime: agent.endTime ? new Date(agent.endTime) : undefined,
         })),
         todos: data.todos.map((todo) => ({ ...todo })),
+        toolCounts: data.toolCounts,
         sessionStart: data.sessionStart ? new Date(data.sessionStart) : undefined,
         sessionName: data.sessionName,
     };
@@ -141,6 +143,12 @@ export async function parseTranscript(transcriptPath) {
     catch {
         // Return partial results on error
     }
+    // Compute full tool counts before slicing for display
+    const toolCounts = {};
+    for (const tool of toolMap.values()) {
+        toolCounts[tool.name] = (toolCounts[tool.name] ?? 0) + 1;
+    }
+    result.toolCounts = toolCounts;
     result.tools = Array.from(toolMap.values()).slice(-20);
     result.agents = Array.from(agentMap.values()).slice(-10);
     result.todos = latestTodos;

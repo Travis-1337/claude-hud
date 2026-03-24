@@ -11,6 +11,7 @@ import {
   renderEnvironmentLine,
   renderUsageLine,
   renderMemoryLine,
+  renderToolCountsLine,
 } from './lines/index.js';
 import { dim, RESET } from './colors.js';
 
@@ -349,6 +350,8 @@ function renderElementLine(ctx: RenderContext, element: HudElement): string | nu
       return renderMemoryLine(ctx);
     case 'environment':
       return renderEnvironmentLine(ctx);
+    case 'toolCounts':
+      return display?.showToolCounts === false ? null : renderToolCountsLine(ctx);
     case 'tools':
       return display?.showTools === false ? null : renderToolsLine(ctx);
     case 'agents':

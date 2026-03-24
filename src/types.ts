@@ -79,6 +79,7 @@ export interface TranscriptData {
   tools: ToolEntry[];
   agents: AgentEntry[];
   todos: TodoItem[];
+  toolCounts?: Record<string, number>;
   sessionStart?: Date;
   sessionName?: string;
 }

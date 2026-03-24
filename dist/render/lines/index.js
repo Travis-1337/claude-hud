@@ -3,4 +3,5 @@ export { renderProjectLine } from './project.js';
 export { renderEnvironmentLine } from './environment.js';
 export { renderUsageLine } from './usage.js';
 export { renderMemoryLine } from './memory.js';
+export { renderToolCountsLine } from './tool-counts.js';
 //# sourceMappingURL=index.js.map
